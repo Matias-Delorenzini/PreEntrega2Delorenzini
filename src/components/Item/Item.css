@@ -1,6 +1,7 @@
 .ItemImg{
     width: 200px;
-    height: auto;
+    height: 200px;
+    object-fit: cover;
 }
 
 p{
@@ -9,6 +10,11 @@ p{
     color: rgb(145, 133, 90);
 }
 
+.Info{
+    font-size: large;
+}
+
 footer.ItemFooter{
     background-color: black;
 }
+

@@ -5,9 +5,10 @@ const Item = ({id, name, price, stock, img}) => {
 
     return (
         <article className="CardItem">
+            <Link to={`/item/${id}`}>{name}
             <header className="Header">
                 <h2 className="ItemHeader">
-                    <Link to={`/item/${id}`}>{name}</Link>
+                    
                 </h2>
             </header>
             <picture>
@@ -21,6 +22,7 @@ const Item = ({id, name, price, stock, img}) => {
                     Unidades disponibles: {stock}
                 </p>
             </section>
+            </Link>
         </article>
     )
 }
