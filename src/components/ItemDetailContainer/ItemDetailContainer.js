@@ -1,28 +1,45 @@
-import {useState, useEffect} from "react"
-import { getProductById } from "../../asyncMock"
-import ItemDetail from "../ItemDetail/ItemDetail"
-import { useParams } from "react-router-dom"
+import { useEffect } from 'react';
+import { useState } from 'react'
+import { useParams } from 'react-router-dom';
+import getData from '../../services/asyncMock';
+import ItemCount from '../ItemCount/ItemCount';
 
-const ItemDetailContainer = () => {
-    const [product, setProduct] = useState(null)
-
-    const { itemId } = useParams()
+function ItemDetailContainer() {
+    const [product, setProduct] = useState({});
+    const {id} = useParams();
 
     useEffect(() => {
-        getProductById(itemId)
-            .then(response => {
-                setProduct(response)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }, [itemId])
+        async function requestProduct() {
+            const respuesta = await getData(id);
+            setProduct(respuesta);
+        }
+        
+        requestProduct();
+    }, [id]);
 
-    return(
-        <div className="ItemDetailContainer">
-            <ItemDetail {...product} />
-        </div>
-    )
+    function handleAddToCart(clickCount) {
+        alert(`Agregaste ${clickCount} unidades de ${product.title} al carrito`)
+    }
+
+    return (
+        <article className="CardItem">
+        <header className="Header">
+            <h2 className="ItemHeader">
+                {product.name}
+            </h2>
+        </header>
+        <picture>
+            <img src={product.img} alt={product.name} className="ItemImg"/>
+        </picture>
+        <section className="Info">
+            <p className="InfoPrice">${product.price}</p>
+            <p className="InfoStock">Unidades disponibles: {product.stock} ¡No te quedes sin la tuya!</p>
+        </section>
+        <footer className="ItemFooter">
+            <ItemCount stock={product.stock} initial={1} onAddTocart={handleAddToCart}/>
+        </footer>
+    </article>
+);
 }
 
-export default ItemDetailContainer
+export default ItemDetailContainer;
