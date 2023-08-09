@@ -1,27 +1,26 @@
-import { getProducts, getProductsByCategory } from "../../asyncMock"
 import { useState, useEffect } from "react";
-import ItemList  from "../ItemList/ItemList";
-import { useParams } from "react-router-dom";
-import "./ItemListContainer.css"
+import getData from "../../services/asyncMock";
+import ItemList from "../ItemList/ItemList";
 
-const ItemListContainer = ({ greeting }) => {
-    const [products, setProducts] = useState([])
-    
-    const { categoryId } = useParams()
+function ItemListContainer() {
+    console.log("Renderizamos item list container");
+    const [products, setProducts] = useState([]);
+
+    async function requestProducts() {
+        const respuesta = await getData();
+        setProducts(respuesta);
+    }
 
     useEffect(() => {
-        const asyncFunc = categoryId ? getProductsByCategory : getProducts
-        
-        asyncFunc(categoryId)
-            .then(response => {setProducts(response)})
-            .catch(error => {console.error(error)})
-}, [categoryId])
+        console.log("Montaje ILC");
+        requestProducts();
+    }, []);
 
     return (
         <div>
-            <h1 className="Greeting">{greeting}</h1>
-            <ItemList products={products}/>
+            <ItemList products={products}></ItemList>
         </div>
-    )
+    );
 }
-export default ItemListContainer 
+
+export default ItemListContainer;
