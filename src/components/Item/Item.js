@@ -1,10 +1,11 @@
 import "./Item.css"
 import { Link } from 'react-router-dom';
 
-const Item = ({id, name, price, stock, img}) => {
+const Item = (props) => {
+    const { id, name, price, stock, img} = props;
 
     return (
-        <article className="CardItem">
+        <div className="CardItem">
             <Link to={`/item/${id}`}>{name}
             <header className="Header">
                 <h2 className="ItemHeader">
@@ -23,7 +24,7 @@ const Item = ({id, name, price, stock, img}) => {
                 </p>
             </section>
             </Link>
-        </article>
+        </div>
     )
 }
 
