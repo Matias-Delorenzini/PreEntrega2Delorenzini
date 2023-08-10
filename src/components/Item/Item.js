@@ -5,11 +5,10 @@ const Item = (props) => {
     const { id, name, price, stock, img} = props;
 
     return (
-        <div className="CardItem">
-            <Link to={`/item/${id}`}>{name}
+            <Link to={`/item/${id}`} className="Link">
             <header className="Header">
                 <h2 className="ItemHeader">
-                    
+                    {name}
                 </h2>
             </header>
             <picture>
@@ -24,7 +23,6 @@ const Item = (props) => {
                 </p>
             </section>
             </Link>
-        </div>
     )
 }
 

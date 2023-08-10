@@ -2,6 +2,7 @@
     width: 200px;
     height: 200px;
     object-fit: cover;
+    background-color: white;
 }
 
 p{
@@ -16,5 +17,20 @@ p{
 
 footer.ItemFooter{
     background-color: black;
+}
+
+.Link{
+    width: 300px;
+    height: auto;
+}
+
+.Link:hover{
+    background-color: rgb(27, 27, 27);
+    border-radius: 5px;
+
+}
+
+.ItemHeader{
+    font-size: large;
 }
 
